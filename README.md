@@ -5,7 +5,7 @@
 > **DANGER:** This project involves the design and construction of a device that applies electrical current to the human body. Improper construction, component failure, or misuse can result in **electric shock, burns, injury, or death**.
 
 * **Galvanic Isolation is mandatory:** Never bypass the isolation barriers designed into this PCB.
-* **Battery Power Only:** This device is designed for battery operation.
+* **Battery Power Only:** This device is designed solely for battery operation.
 * **Educational Use:** This project is for educational and research purposes only. It is not an FDA-approved medical device.
 * **Liability:** The authors and contributors are not responsible for any harm caused by the assembly or use of this device. **Build and use at your own risk.**
 
@@ -17,18 +17,20 @@ This repository contains the complete hardware, firmware, and mechanical design 
 
 The system uses a regulated DC current (typically 0–30mA) applied through water baths to treat excessive sweating of the hands or feet. Unlike simple resistive devices, this project features active closed-loop current regulation, ensuring consistent treatment current regardless of water resistance or skin impedance changes.
 
+To learn more about this project, check out this blog post on maker.io:
+> Coming Soon: Link to DigiKey blog post on maker.io
+
 ## Key Features
 
 * **Galvanic Isolation:** Physical and electrical separation between the control logic (ESP32) and the high-voltage treatment side using an isolated DC-DC converter (Ag7200) and optocouplers.
-* **Active Current Control:** PID-driven Op-Amp and MOSFET current sink maintains steady current.
+* **Active Current Control:** PWM-driven Op-Amp and MOSFET current sink maintains steady current.
 * **Automatic Polarity Switching:** Integrated H-Bridge relays automatically reverse polarity halfway through treatment to ensure even effect on both limbs.
 * **Safety Fuse:** Hardware-level protection in a quick-blow fuse that physically blocks the current path if it exceeds safety limits (independent of software).
-* **Anti-Shock Ramping:** Software "Soft-Start" and "Soft-Stop" to prevent uncomfortable shocks when entering or leaving the water.
 
 ## Repository Structure
 
 ```text
-ionto_proj/
+Iontophoresis-Device/
 ├── README.md         # Project documentation and safety warnings
 ├── 3d/
 │   ├── CAD/          # .step files for the enclosure body and lid
@@ -36,8 +38,10 @@ ionto_proj/
 ├── firmware/
 │   └── Ionto_Sketch.ino # Arduino source code for the ESP32-S3
 └── hardware/
-    ├── Ionto.kicad_pro  # KiCad 8.0 Project File
+    ├── Ionto.kicad_pro  # KiCad 9.0 Project File
     ├── Ionto.kicad_sch  # Schematic File
+    ├── Current_Regulator.kicad_sch    #heirarchal schematic for current regulation 
+    ├── H-Bridge.kicad_sch             #heirarchal schematic for H-Bridge
     ├── Ionto.kicad_pcb  # 6-Layer PCB Layout File
     └── jlcpcb/          # Production files (Gerbers, BOM, CPL)
 ```
